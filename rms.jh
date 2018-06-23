@@ -1,0 +1,397 @@
+entity Company {
+CompanyName String  required,
+CompanyLocation String  required,
+CompanyWesite String,
+Logo ImageBlob  required,
+CompanyEmail String  required,
+AdditionalCompanyEmail String
+TelNumber String  required,
+AdditionalTelephoneNo String,
+}
+entity AgentType{
+Type String  required,
+Description String  required
+}
+entity PropertyOwner{
+FirstName String  required,
+LastName String  required,
+CompanyName String  required,
+Email String  required,
+AdditionalEmail String,
+IsCompany Boolean  required,
+TelNumber String ,
+AdditionalTelephoneNo String,
+}
+entity Agent {
+FirstName String  required,
+LastName String  required,
+Gender Gender,
+EmailAddress String  required,
+Phone String  required,
+Fax String,
+Website String,
+DateCreated LocalDate required,
+StreetAddress String  required,
+Country String required, 
+City String  required,
+County String  required,
+ZipCode String,
+Dob LocalDate  required
+}
+entity PropertyFeature{
+Feature String
+}
+entity Property{
+PropertyName String  required,
+YearBuilt Integer  required,
+StreetAddress String  required,
+City String  required,
+County String  required,
+State String  required,
+ZipCode String,
+Country String  required,
+Furnished Boolean  required,
+Smoking Boolean  required,
+PetsAllowed Boolean  required,
+ParkingAvailable Boolean  required,
+NoOfUnits Integer required
+}
+entity PropertyAmenity{
+AmenityName String  required,
+Description String  required
+}
+entity PropertyType{
+PropertyType String  required,
+Description String  required
+}
+entity PropertyImage{
+Image ImageBlob,
+DateUploaded LocalDate
+}
+entity PropertyUnit{
+NoOfRooms Integer required,
+RentAmount Long required,
+DepositAmount Long required,
+SizeSqFt Integer
+}
+entity UnitAttribute{
+AttributeName String required,
+AttributeValue String required
+}
+enum Gender{
+MALE,
+FEMALE
+}
+enum ProviderType{
+SERVICEPROFESSIONAL,
+SERVICEPROVIDER
+}
+entity Tenant{
+FirstName String required,
+LastName String required,
+MiddleName String ,
+IdOrPassportNo String,
+RegisterAsForeigner Boolean,
+AlienId String,
+PhotoImage ImageBlob,
+IsCompany Boolean required,
+DateOfBirth LocalDate required,
+Age Long,
+Gender Gender required,
+PrimaryEmail String required,
+Phone String required,
+AdditionalEmail String,
+AdditionalPhone String,
+AdditionalDetails String,
+StreetAddress String,
+City String,
+County String  required,
+StateOrRegion String,
+ZipCode Integer,
+Country String  required
+}
+entity Tenancy{
+StartDate LocalDate,
+EndDate LocalDate,
+ContractExpiryDate LocalDate,
+InspectionFrequency Integer,
+Status String
+}
+entity BankAccount {
+AccountName String
+Description  String,
+OpeningBalanceDate  LocalDate,
+OpeningBalanceValue LocalDate,
+Closed Boolean
+}
+
+entity TenantEmergencyContact{
+FirstName String required,
+LastName String required,
+Gender Gender required,
+RelationShip String required,
+Phone String required,
+OtherPhoneNumber String,
+PrimaryEmail String ,
+SecondaryEmail String
+OtherDetails String
+}
+
+entity TenantVehicle{
+Type String required,
+Make String required,
+Model String required,
+Year Integer,
+Colour String ,
+License String  required,
+Image Blob
+}
+
+
+entity ServiceProvider{
+RegisterAsCompany Boolean required,
+FirstName String  ,
+LastName String ,
+MiddleName String,
+ProviderImage ImageBlob,
+CompanyName String,
+CompanyWebsite String,
+PrimaryEmail String required,
+AdditionalEmail String
+Phone String required,
+AdditionalPhone String,
+Fax String,
+ProviderType ProviderType required,
+StreetAddress String,
+City String,
+Country String,
+StateOrRegion String
+ZipCode String,
+Country String,
+Notes String
+}
+entity Service{
+ServiceName String  required,
+ServiceDescription String
+}
+entity ServiceCategory{
+CategoryName String required
+}
+
+entity Transaction{
+TransDate LocalDate
+}
+
+entity TransCategory{
+Name String required,
+ShtCode String required,
+Description String,
+CategoryType TransType
+}
+entity TransSubCategory{
+Name String required,
+ShtCode String required,
+Description String 
+}
+entity Country{
+Name  String required,
+Code String required
+}
+entity ZipCode{
+Code Integer required
+}
+entity County{
+Name String required,
+Code String required
+}
+
+entity StateOrRegion{
+Name String required,
+Code String
+}
+entity City{
+Name String required,
+Code String
+}
+entity Currency{
+ShtCode String required,
+Name String required
+}
+entity IncomeGroup{
+Code String required, 
+Description String required,
+Taxable Boolean required,
+IncludeInCashFlowAnnalysis Boolean,
+UsedToPayRent Boolean
+TaxRate Long
+}
+enum SYSEntity{
+PROPERTY,
+AGENT,
+TENANT,
+SERVICEPROVIDER,
+OWNER,
+PROPERTYUNIT
+}
+enum Input{
+TEXT,
+NUMBER,
+DATE,
+CHECKBOX
+}
+enum TransType{
+DEBIT,
+CREDIT
+}
+entity CustomField{
+Label String required,
+Input Input required,
+SYSEntity SYSEntity required
+}
+entity PaymentMethod{
+ShortCode String required,
+Description String required
+}
+entity InspectionRoom{
+Name String required,
+Description String,
+}
+entity RoomAttribute{
+Name String required,
+Description String
+}
+entity InspectionTemplate
+{
+TemplateName String required,
+Included Boolean required,
+Sort Integer required
+}
+entity Invoice{
+InvoiceNumber String,
+DateIssued LocalDate,
+InvoiceStatus InvoiceStatus,
+AuthorizedBy String,
+DateAuthorized LocalDate,
+DatePaid LocalDate,
+TotalPaid Long,
+AmountPayable Long,
+OtherDetails String
+}
+enum InvoiceStatus{
+CANCELLED,
+PAID,
+PENDING,
+DISPUTED
+}
+entity SystemDocument{
+DocumentName String,
+Description String,
+Required Boolean,
+RequiredFrom  SYSEntity,
+RequiredFromDate LocalDate,
+DateUpdated Instant
+
+}
+entity TenantDocument{
+DateRequested LocalDate,
+DateSubmitted LocalDate,
+IsValid Boolean,
+DateValidated LocalDate
+}
+entity SystemParameters{
+Name String,
+Description String,
+Status Status,
+Value String,
+ApplicableToModule String,
+DateUpdated Instant
+}
+enum Status{
+ACTIVE,
+INACTIVE
+}
+entity Role{
+Name String,
+DateCreated String
+}
+entity Resource{
+Tenants Boolean,
+Agents Boolean,
+Properties Boolean,
+Service_providers Boolean,
+Property_units Boolean,
+Users Boolean,
+Transaction_categories Boolean,
+Transactions Boolean,
+Company_bank_accounts Boolean,
+System_documents Boolean,
+Invoices Boolean,
+Receipts Boolean,
+Income_groups Boolean,
+Services Boolean,
+Tenant_documents Boolean,
+Property_images Boolean,
+Agent_types Boolean
+}
+entity Access{
+No_access Boolean,
+View Boolean,
+Create Boolean,
+Edit Boolean,
+Remove Boolean
+}
+
+//@todo create a new layer between transactions and transaction details,
+//this is os that you can have a parent transaction type that is either a debit, credit or jv
+relationship OneToMany{
+Role{accessAreas} to Resource{Roles(Name)},
+Resource{grants} to Access{resource},
+Company{companyAgents} to Agent{company(CompanyName) required},
+Company{companyTenants} to Tenant{company(CompanyName) required},
+Company{companyServiceProviders} to ServiceProvider{company(CompanyName) required},
+Property{propertyAmenities} to PropertyAmenity{amenityProperties},
+Property{feature} to PropertyFeature{featureProperties},
+Company{companyProperties} to Property{company(CompanyName) required},
+Company{companyTransactions} to Transaction{transCompany(companyName) required},
+Company{companyAccounts} to BankAccount{accountOwner(companyName) required},
+PropertyOwner{ownerProperties} to Property{owner} ,
+PropertyUnit{attributes} to UnitAttribute{units},
+Tenant {vehicles}to TenantVehicle{vehicleOwner},
+Property{propertyUnits} to PropertyUnit{unitProperty},
+ServiceProvider{servicesRendered} to Service{providers},
+TransCategory{subCategories} to TransSubCategory{transCategory},
+Country{counties} to County{country},
+Tenant{tenantTransactions} to Transaction{tenant(FirstName)},
+Agent{agentTransactions} to Transaction{agent(FirstName)},
+ZipCode{codeStateOrRegions} to StateOrRegion{zipCodes},
+InspectionRoom{roomAttributes} to RoomAttribute{roomsWithAttribute}
+InspectionTemplate{inspectionRooms} to InspectionRoom{templates},
+Tenant{contracts} to Tenancy{tenant(FirstName)},
+BankAccount{transactions} to Transaction{account(Accountname)},
+Tenant{invoices} to Invoice{tenant(FirstName)},
+PropertyUnit{inspectionTemplates} to InspectionTemplate{propertyUnit(NoOfRooms)},
+SystemDocument{uploadedDocuments} to TenantDocument{tenantDocuments(DocumentName)},
+Tenant{submittedDocuments} to TenantDocument{tenant(FirstName)}
+}
+relationship OneToOne{
+Agent{userDetail} to User ,
+Invoice{incomeGroup} to IncomeGroup{invoiceTransactions}
+Transaction{category} to TransCategory{transactions}
+Transaction{paymentMethod} to PaymentMethod{}
+ZipCode{codeCities} to City{zipCode},
+Country{currency} to Currency{country}
+Agent{type(Name)} to AgentType,
+ZipCode{Counties} to Country{zipCodes},
+Service{category} to ServiceCategory{registeredServices}
+Property{propertyType} to PropertyType{typeProperties},
+PropertyImage{imageProperty} to Property{images},
+TenantEmergencyContact{tenant} to Tenant{emergencyContacts},
+SystemParameters{updatedBy} to User,
+SystemDocument{updatedBy} to User,
+TenantDocument{validatedBy} to User,
+TenantDocument{receivedBy required} to User ,
+PropertyUnit{createdBy required} to User ,
+Property{createdBy required} to User ,
+PropertyUnit{updatedBY} to User,
+Property{updatedBY} to User
+}
